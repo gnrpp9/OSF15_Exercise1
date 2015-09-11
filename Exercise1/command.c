@@ -10,9 +10,21 @@
 
 
 	//TODO FUNCTION COMMENT
-bool parse_user_input (const char* input, Commands_t** cmd) {
+	/*
+		PURPOSE: Parses user input and checks if it's valid
+		INPUTS: input - the user input
+			cmd - pointer to struct to hold commands
+		RETURN: If no errors during parsing returns true
+			else false
+	*/
+	bool parse_user_input (const char* input, Commands_t** cmd) {
 	
 	//TODO ERROR CHECK INCOMING PARAMETERS
+	if (!input)
+	{
+		printf("There is no input!\n");
+		return false;
+	}
 
 	char *string = strdup(input);
 	
@@ -37,10 +49,20 @@ bool parse_user_input (const char* input, Commands_t** cmd) {
 }
 
 	//TODO FUNCTION COMMENT
-void destroy_commands(Commands_t** cmd) {
+	/*
+		PURPOSE: Free memory in cmd
+		INPUTS:	cmd - commands to be destroyed
+		RETURN: Nothing
+	*/
+	void destroy_commands(Commands_t** cmd) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	
+	if (!(*cmd))
+	{
+		printf("Command list is empty!\n");
+		return;
+	}
+
 	for (int i = 0; i < (*cmd)->num_cmds; ++i) {
 		free((*cmd)->cmds[i]);
 	}
